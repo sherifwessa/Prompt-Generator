@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<ScrollPane prefHeight="959.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.final_project.GeneratePrompt">
+   <content>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="918.0" prefWidth="1746.0" style="-fx-background-color: #0a0619;">
+         <children>
+            <ImageView fitHeight="59.0" fitWidth="282.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../Dropbox/My%20PC%20(LAPTOP-6CNKD1OU)/Desktop/Prog%20in%20Java/Final/Final%20Project/Logo.png" />
+               </image>
+            </ImageView>
+            <TabPane layoutX="78.0" layoutY="85.0" prefHeight="722.0" prefWidth="1010.0" style="-fx-background-color: #111111;" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Code">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="673.0" prefWidth="1014.0" style="-fx-background-color: #651251;">
+                           <children>
+                              <TextField fx:id="topic" layoutX="561.0" layoutY="92.0" prefHeight="26.0" prefWidth="282.0" />
+                              <Button fx:id="generateButton" layoutX="565.0" layoutY="392.0" mnemonicParsing="false" onAction="#generatePrompt" prefHeight="42.0" prefWidth="282.0" style="-fx-background-color: #266aec;" text="Generate Prompt" textFill="WHITE">
+                                 <font>
+                                    <Font name="Franklin Gothic Demi Cond" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Label layoutX="561.0" layoutY="70.0" prefHeight="18.0" prefWidth="43.0" text="Topic*" textFill="WHITE" />
+                              <MenuButton fx:id="languageMenu" layoutX="121.0" layoutY="39.0" mnemonicParsing="false" text="Language">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Java" />
+                                  <MenuItem mnemonicParsing="false" text="Python" />
+                                    <MenuItem mnemonicParsing="false" text="C++" />
+                                </items>
+                              </MenuButton>
+                              <TextField fx:id="problemStatement" layoutX="108.0" layoutY="263.0" prefHeight="168.0" prefWidth="350.0" />
+                              <Label layoutX="108.0" layoutY="243.0" prefHeight="18.0" prefWidth="114.0" text="Problem Statement*" textFill="WHITE" />
+                              <TextField fx:id="assumptions" layoutX="561.0" layoutY="150.0" prefHeight="83.0" prefWidth="282.0" />
+                              <Label layoutX="561.0" layoutY="132.0" prefHeight="18.0" prefWidth="74.0" text="Assumtions" textFill="WHITE" />
+                              <TextField fx:id="constraints" layoutX="561.0" layoutY="270.0" prefHeight="83.0" prefWidth="282.0" />
+                              <Label layoutX="561.0" layoutY="252.0" prefHeight="18.0" prefWidth="74.0" text="Constraints" textFill="WHITE" />
+                              <TextField fx:id="existingCode" layoutX="108.0" layoutY="107.0" prefHeight="125.0" prefWidth="350.0" />
+                              <Label layoutX="108.0" layoutY="87.0" prefHeight="18.0" prefWidth="106.0" text="Existing Code" textFill="WHITE" />
+                              <AnchorPane layoutX="57.0" layoutY="466.0" prefHeight="196.0" prefWidth="847.0" style="-fx-background-color: #E8DAEF;">
+                                 <children>
+                                    <Button fx:id="copyButton" layoutX="735.0" layoutY="160.0" mnemonicParsing="false" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE">
+                                       <font>
+                                          <Font name="Franklin Gothic Demi Cond" size="16.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="regenerateButton" layoutX="24.0" layoutY="161.0" mnemonicParsing="false" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE">
+                                       <font>
+                                          <Font name="Franklin Gothic Demi Cond" size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="promptLabel" layoutX="22.0" layoutY="75.0" prefHeight="76.0" prefWidth="764.0" style="-fx-background-color: #FDFEFE;" text="Prompt" wrapText="true">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="22.0" layoutY="14.0" prefHeight="47.0" prefWidth="159.0" text="Prompt" textFill="#0a0619">
+                                       <font>
+                                          <Font name="System Bold" size="32.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Text/QA">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+      </AnchorPane>
+   </content>
+</ScrollPane>
