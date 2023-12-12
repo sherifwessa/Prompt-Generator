@@ -14,14 +14,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <ScrollPane prefHeight="959.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.final_project.GeneratePrompt">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="918.0" prefWidth="1746.0" style="-fx-background-color: #0a0619;">
          <children>
             <ImageView fitHeight="59.0" fitWidth="282.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../Dropbox/My%20PC%20(LAPTOP-6CNKD1OU)/Desktop/Prog%20in%20Java/Final/Final%20Project/Logo.png" />
+                  <Image url="Logo.png" />
                </image>
             </ImageView>
             <TabPane layoutX="78.0" layoutY="85.0" prefHeight="722.0" prefWidth="1010.0" style="-fx-background-color: #111111;" tabClosingPolicy="UNAVAILABLE">
@@ -37,7 +36,7 @@
                                  </font>
                               </Button>
                               <Label layoutX="561.0" layoutY="70.0" prefHeight="18.0" prefWidth="43.0" text="Topic*" textFill="WHITE" />
-                              <MenuButton fx:id="languageMenu" layoutX="121.0" layoutY="39.0" mnemonicParsing="false" text="Language">
+                              <MenuButton fx:id="languageMenu" layoutX="123.0" layoutY="44.0" mnemonicParsing="false" text="Language">
                                 <items>
                                   <MenuItem mnemonicParsing="false" text="Java" />
                                   <MenuItem mnemonicParsing="false" text="Python" />
