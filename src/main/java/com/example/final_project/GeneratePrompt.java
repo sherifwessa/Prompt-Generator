@@ -30,11 +30,7 @@ public class GeneratePrompt {
     @FXML
     private ChoiceBox existingCodeChoice;
 
-//    @FXML
-//    private void generatePrompt(){
-//        String topics = topic.getText();
-//        promptLabel.setText(topics);
-//    }
+    private StringBuilder prompt;
 
     @FXML
     private void setVisible() {
