@@ -30,11 +30,11 @@ public class GeneratePrompt {
     @FXML
     private ChoiceBox existingCodeChoice;
 
-    @FXML
-    private void generatePrompt(){
-        String topics = topic.getText();
-        promptLabel.setText(topics);
-    }
+//    @FXML
+//    private void generatePrompt(){
+//        String topics = topic.getText();
+//        promptLabel.setText(topics);
+//    }
 
     @FXML
     private void setVisible() {
@@ -44,6 +44,14 @@ public class GeneratePrompt {
         } else if ("Yes".equals(choiceValue)) {
             existingCode.setDisable(false);
         }
+    }
+
+    @FXML
+    private void generatePrompt()
+    {
+        generateButton.setVisible(false);
+        copyButton.setVisible(true);
+        regenerateButton.setVisible(true);
     }
 }
 
