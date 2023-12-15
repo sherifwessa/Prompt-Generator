@@ -4,6 +4,7 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -31,12 +32,12 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="673.0" prefWidth="1014.0" style="-fx-background-color: #651251;">
                            <children>
-                              <TextField fx:id="topic" layoutX="467.0" layoutY="107.0" prefHeight="26.0" prefWidth="282.0" />
-                              <Label layoutX="467.0" layoutY="85.0" prefHeight="18.0" prefWidth="43.0" text="Topic*" textFill="WHITE" />
-                              <Label layoutX="14.0" layoutY="265.0" prefHeight="18.0" prefWidth="114.0" text="Problem Statement*" textFill="WHITE" />
-                              <Label layoutX="467.0" layoutY="152.0" prefHeight="18.0" prefWidth="74.0" text="Assumtions" textFill="WHITE" />
-                              <Label layoutX="467.0" layoutY="272.0" prefHeight="18.0" prefWidth="74.0" text="Constraints" textFill="WHITE" />
-                              <Label layoutX="14.0" layoutY="123.0" prefHeight="18.0" prefWidth="106.0" text="Existing Code" textFill="WHITE" />
+                              <TextField fx:id="topic" layoutX="553.0" layoutY="111.0" prefHeight="26.0" prefWidth="306.0" />
+                              <Label layoutX="553.0" layoutY="89.0" prefHeight="18.0" prefWidth="43.0" text="Topic*" textFill="WHITE" />
+                              <Label layoutX="14.0" layoutY="269.0" prefHeight="18.0" prefWidth="114.0" text="Problem Statement*" textFill="WHITE" />
+                              <Label layoutX="553.0" layoutY="156.0" prefHeight="18.0" prefWidth="74.0" text="Assumtions" textFill="WHITE" />
+                              <Label layoutX="553.0" layoutY="276.0" prefHeight="18.0" prefWidth="74.0" text="Constraints" textFill="WHITE" />
+                              <Label layoutX="14.0" layoutY="127.0" prefHeight="18.0" prefWidth="106.0" text="Existing Code" textFill="WHITE" />
                               <AnchorPane layoutX="14.0" layoutY="466.0" prefHeight="268.0" prefWidth="847.0" style="-fx-background-color: #E8DAEF;">
                                  <children>
                                     <Button fx:id="copyButton" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
@@ -44,7 +45,7 @@
                                           <Font name="Franklin Gothic Demi Cond" size="16.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="regenerateButton" layoutX="22.0" layoutY="219.0" mnemonicParsing="false" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE" visible="false" onAction="#generatePrompt">
+                                    <Button fx:id="regenerateButton" layoutX="22.0" layoutY="219.0" mnemonicParsing="false" onAction="#generatePrompt" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE" visible="false">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
@@ -70,7 +71,7 @@
                                            <String fx:value="JavaScript" />
                                        </FXCollections>
                                    </items>
-                               </ChoiceBox>                              <Label fx:id="selectLanguageLabel" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="106.0" text="Select a language" textFill="WHITE" />
+                               </ChoiceBox>                              <Label fx:id="selectLanguageLabel" layoutX="16.0" layoutY="23.0" prefHeight="18.0" prefWidth="106.0" text="Select a language" textFill="WHITE" />
                               <Label fx:id="selectLanguageLabel1" layoutX="199.0" layoutY="23.0" prefHeight="18.0" prefWidth="150.0" text="Do you have existing code?" textFill="WHITE" />
                               <ChoiceBox fx:id="existingCodeChoice" layoutX="196.0" layoutY="45.0" onAction="#setVisible" prefWidth="150.0">
                                   <items>
@@ -80,19 +81,54 @@
                                       </FXCollections>
                                   </items>
                               </ChoiceBox>
-                              <TextArea fx:id="existingCode" disable="true" layoutX="14.0" layoutY="148.0" prefHeight="114.0" prefWidth="339.0" />
-                              <TextArea fx:id="problemStatement" layoutX="14.0" layoutY="283.0" prefHeight="170.0" prefWidth="342.0" />
-                              <TextArea fx:id="constraints" layoutX="467.0" layoutY="290.0" prefHeight="165.0" prefWidth="307.0" />
-                              <TextArea fx:id="assumptions" layoutX="467.0" layoutY="170.0" prefHeight="101.0" prefWidth="306.0" />
-                              <TextField fx:id="languageVersion" layoutX="117.0" layoutY="90.0" prefHeight="26.0" prefWidth="235.0" />
-                              <Label fx:id="languageVersionLabel" layoutX="14.0" layoutY="94.0" prefHeight="18.0" prefWidth="140.0" text="Language Version:" textFill="WHITE" />
+                              <TextArea fx:id="existingCode" disable="true" layoutX="14.0" layoutY="152.0" prefHeight="114.0" prefWidth="339.0" />
+                              <TextArea fx:id="problemStatement" layoutX="14.0" layoutY="287.0" prefHeight="170.0" prefWidth="342.0" />
+                              <TextArea fx:id="constraints" layoutX="553.0" layoutY="294.0" prefHeight="165.0" prefWidth="307.0" />
+                              <TextArea fx:id="assumptions" layoutX="553.0" layoutY="174.0" prefHeight="101.0" prefWidth="306.0" />
+                              <TextField fx:id="languageVersion" layoutX="117.0" layoutY="94.0" prefHeight="26.0" prefWidth="235.0" />
+                              <Label fx:id="languageVersionLabel" layoutX="14.0" layoutY="98.0" prefHeight="18.0" prefWidth="140.0" text="Language Version:" textFill="WHITE" />
+                              <TextField fx:id="languageVersion1" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" />
+                              <Label fx:id="languageVersionLabel1" layoutX="650.0" layoutY="23.0" prefHeight="18.0" prefWidth="113.0" text="ChatGPT 3.5 API Key:" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
                 <Tab text="Text/QA">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #651251;">
+                           <children>
+                              <ChoiceBox fx:id="opChoice" layoutX="382.0" layoutY="111.0" prefWidth="150.0" />
+                              <Label layoutX="359.0" layoutY="73.0" text="Choose the type of prompt:" textFill="WHITE">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextArea layoutX="266.0" layoutY="182.0" prefHeight="178.0" prefWidth="382.0" />
+                              <Label layoutX="409.0" layoutY="153.0" text="Topic/Question" textFill="#fcfcfc">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="331.0" layoutY="384.0" text="Maximum words:" textFill="#fcfcfc">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="448.0" layoutY="382.0" prefHeight="26.0" prefWidth="135.0" />
+                              <Label layoutX="288.0" layoutY="426.0" text="Relate to any topic?" textFill="#fcfcfc">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="422.0" layoutY="423.0" prefHeight="26.0" prefWidth="204.0" />
+                              <CheckBox layoutX="404.0" layoutY="465.0" mnemonicParsing="false" text="Add personal opinion as if you" textFill="WHITE" />
+                              <Label layoutX="208.0" layoutY="29.0" text="ChatGPT 3.5 API Key:" textFill="#fcfcfc">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" />
+                           </children></AnchorPane>
                   </content>
                 </Tab>
               </tabs>
