@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class MainClass extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("prompt-generator.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader(MainClass.class.getResource("prompt-generator.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 500);
         stage.setTitle("Prompt Generator");
         stage.setScene(scene);
         stage.show();
