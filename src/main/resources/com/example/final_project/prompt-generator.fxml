@@ -7,7 +7,6 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -56,7 +55,7 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="promptBox" layoutX="14.0" layoutY="58.0" prefHeight="152.0" prefWidth="818.0" wrapText="true" />
+                                    <TextArea fx:id="promptBox" editable="false" layoutX="14.0" layoutY="58.0" prefHeight="152.0" prefWidth="818.0" wrapText="true" />
                                     <Button fx:id="generateButton" layoutX="350.0" layoutY="217.0" mnemonicParsing="false" onAction="#generatePrompt" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
@@ -153,13 +152,12 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="promptBox1" layoutX="14.0" layoutY="44.0" prefHeight="152.0" prefWidth="805.0" wrapText="true" />
+                                    <TextArea fx:id="promptBox1" editable="false" layoutX="14.0" layoutY="44.0" prefHeight="152.0" prefWidth="805.0" wrapText="true" />
                                     <Button fx:id="generateButton2" layoutX="352.0" layoutY="204.0" mnemonicParsing="false" onAction="#generatePrompt2" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
                                     </Button>
-                                    <ProgressIndicator fx:id="progressIndicator" layoutX="395.0" layoutY="94.0" prefHeight="47.0" prefWidth="114.0" styleClass="color" />
                                  </children>
                               </AnchorPane>
                               <Label layoutX="499.0" layoutY="180.0" text="Desired structure:" textFill="#fcfcfc">

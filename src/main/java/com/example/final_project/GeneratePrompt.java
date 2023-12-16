@@ -88,13 +88,11 @@ public class GeneratePrompt {
     private TextArea promptBox1;
 
     @FXML
-    private ProgressIndicator progressIndicator;
-    @FXML
     private Clipboard clipboard;
 
     @FXML
     private void initialize(){
-        progressIndicator.setVisible(false);
+//        progressIndicator.setVisible(false);
         clipboard = Clipboard.getSystemClipboard();
     }
     @FXML
@@ -200,7 +198,7 @@ public class GeneratePrompt {
         boolean mentionOpinion = opinionCheckBox.isSelected();
 
         try {
-            progressIndicator.setVisible(true);
+//            progressIndicator.setVisible(true);
             if (promptType == "Text") {
                 checkEmptyFields(promptType, apiKey2.getText(), textQuestion, structure, purpose);
 
@@ -268,7 +266,7 @@ public class GeneratePrompt {
 //            System.out.println(finalPrompt);
             LLMPrompt(finalPrompt, 1);
 
-            progressIndicator.setVisible(false);
+//            progressIndicator.setVisible(false);
 
             generateButton2.setVisible(false);
             copyButton1.setVisible(true);
@@ -290,7 +288,7 @@ public class GeneratePrompt {
         String constrs = constraints.getText();
 
         try {
-            progressIndicator.setVisible(true);
+//            progressIndicator.setVisible(true);
             if (existingCode.isDisabled()) {
                 checkEmptyFields(topicText, language, languageVar, prob);
 
@@ -319,7 +317,7 @@ public class GeneratePrompt {
             prompt = new StringBuilder();
             LLMPrompt(finalPrompt, 0);
 
-            progressIndicator.setVisible(false);
+//            progressIndicator.setVisible(false);
             generateButton.setVisible(false);
             copyButton.setVisible(true);
             regenerateButton.setVisible(true);
