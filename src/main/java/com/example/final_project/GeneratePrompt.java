@@ -225,7 +225,7 @@ public class GeneratePrompt {
 
             finalPrompt = prompt.toString();
             prompt = new StringBuilder();
-            System.out.println(finalPrompt);
+//            System.out.println(finalPrompt);
             LLMPrompt(finalPrompt, 1);
         } catch (IllegalArgumentException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Empty Field", e.getMessage());
