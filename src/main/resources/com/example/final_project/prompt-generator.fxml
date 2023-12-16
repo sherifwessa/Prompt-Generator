@@ -87,7 +87,7 @@
                               <TextArea fx:id="assumptions" layoutX="553.0" layoutY="174.0" prefHeight="101.0" prefWidth="306.0" />
                               <TextField fx:id="languageVersion" layoutX="117.0" layoutY="94.0" prefHeight="26.0" prefWidth="235.0" />
                               <Label fx:id="languageVersionLabel" layoutX="14.0" layoutY="98.0" prefHeight="18.0" prefWidth="140.0" text="Language Version:" textFill="WHITE" />
-                              <TextField fx:id="languageVersion1" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" />
+                              <TextField fx:id="apiKey1" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" />
                               <Label fx:id="languageVersionLabel1" layoutX="650.0" layoutY="23.0" prefHeight="18.0" prefWidth="113.0" text="ChatGPT 3.5 API Key:" textFill="WHITE" />
                            </children>
                         </AnchorPane>
@@ -100,7 +100,7 @@
                               <ChoiceBox fx:id="opChoice" layoutX="382.0" layoutY="84.0" prefWidth="150.0">
                                <items>
                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Topic" />
+                                       <String fx:value="Text" />
                                        <String fx:value="Question" />
                                    </FXCollections>
                                </items>
@@ -110,7 +110,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextArea layoutX="77.0" layoutY="144.0" prefHeight="178.0" prefWidth="382.0" />
+                              <TextArea fx:id="textQuestionBox" layoutX="77.0" layoutY="144.0" prefHeight="178.0" prefWidth="382.0" />
                               <Label layoutX="220.0" layoutY="115.0" text="Text/Question" textFill="#fcfcfc">
                                  <font>
                                     <Font size="14.0" />
@@ -121,20 +121,20 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="448.0" layoutY="353.0" prefHeight="26.0" prefWidth="135.0" />
+                              <TextField fx:id="maxWords" layoutX="448.0" layoutY="353.0" prefHeight="26.0" prefWidth="135.0" />
                               <Label layoutX="288.0" layoutY="397.0" text="Relate to any topic?" textFill="#fcfcfc">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="422.0" layoutY="394.0" prefHeight="26.0" prefWidth="204.0" />
-                              <CheckBox layoutX="365.0" layoutY="429.0" mnemonicParsing="false" text="Add personal opinion as if you" textFill="WHITE" />
+                              <TextField fx:id="relatedTopic" layoutX="422.0" layoutY="394.0" prefHeight="26.0" prefWidth="204.0" />
+                              <CheckBox fx:id="opinionCheckBox" layoutX="365.0" layoutY="429.0" mnemonicParsing="false" text="Add personal opinion as if you" textFill="WHITE" />
                               <Label layoutX="208.0" layoutY="29.0" text="ChatGPT 3.5 API Key:" textFill="#fcfcfc">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" />
+                              <TextField fx:id="apiKey2" layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" />
                               <AnchorPane layoutX="21.0" layoutY="461.0" prefHeight="194.0" prefWidth="758.0" style="-fx-background-color: #E8DAEF;">
                                  <children>
                                     <Button fx:id="copyButton1" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
@@ -153,7 +153,7 @@
                                        </font>
                                     </Label>
                                     <TextArea fx:id="promptBox1" layoutX="6.0" layoutY="44.0" prefHeight="152.0" prefWidth="818.0" />
-                                    <Button fx:id="generateButton2" layoutX="350.0" layoutY="212.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
+                                    <Button fx:id="generateButton2" layoutX="350.0" layoutY="212.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE" onAction="#generatePrompt2">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
@@ -168,8 +168,10 @@
                               <ChoiceBox fx:id="structureMenu" layoutX="613.0" layoutY="177.0" prefWidth="150.0">
                                  <items>
                                     <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Text" />
-                                       <String fx:value="Question" />
+                                       <String fx:value="Bullet Points" />
+                                       <String fx:value="Paragraph" />
+                                        <String fx:value="Paragraph" />
+                                        <String fx:value="Essay" />
                                     </FXCollections>
                                  </items>
                               </ChoiceBox>

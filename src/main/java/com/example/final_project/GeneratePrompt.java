@@ -49,6 +49,33 @@ public class GeneratePrompt {
     @FXML
     private TextField apiKey2;
 
+    @FXML
+    private ChoiceBox opChoice;
+
+    @FXML
+    private TextArea textQuestionBox;
+
+    @FXML
+    private ChoiceBox structureMenu;
+
+    @FXML
+    private TextField purposeTextBox;
+
+    @FXML
+    private CheckBox humanize;
+
+    @FXML
+    private TextField maxWords;
+
+    @FXML
+    private TextField relatedTopic;
+
+    @FXML
+    private CheckBox opinionCheckBox;
+
+    @FXML
+    private TextArea promptBox1;
+
 
     private String getContent(String response) {
         int start = response.indexOf("content")+ 11;
@@ -98,7 +125,14 @@ public class GeneratePrompt {
             br.close();
             String res = getContent(response.toString());
             res = res.replace("\n", "");
-            promptBox.setText(res);
+            if (flag == 0)
+            {
+                promptBox.setText(res);
+            }
+            else
+            {
+                promptBox1.setText(res);
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -118,44 +152,81 @@ public class GeneratePrompt {
     private void generatePrompt2()
     {
         String finalPrompt = "";
-        String topicText = topic.getText();
-        String language = languages.getValue() != null ? languages.getValue().toString() : "";
-        String languageVar = languageVersion.getText();
-        String code = existingCode.getText();
-        String prob = problemStatement.getText();
-        String assumpts = assumptions.getText();
-        String constrs = constraints.getText();
+        String textQuestion = textQuestionBox.getText();
+        String promptType = opChoice.getValue() != null ? opChoice.getValue().toString() : "";
+        String structure = structureMenu.getValue() != null ? structureMenu.getValue().toString() : "";
+        String purpose = purposeTextBox.getText();
+        boolean isHumanized = humanize.isSelected();
+        String maxWordsCounter = maxWords.getText();
+        String otherTopic = relatedTopic.getText();
+        boolean mentionOpinion = opinionCheckBox.isSelected();
 
         try {
-            if (existingCode.isDisabled()) {
-                checkEmptyFields(topicText, language, languageVar, prob);
+            if (promptType == "Text") {
+                checkEmptyFields(promptType, apiKey2.getText(), textQuestion, structure, purpose);
 
-                prompt.append("Generate a clear prompt, do any assumption and elaborate based on the following data:")
-                        .append("Topic: ").append(topicText).append(",")
-                        .append("Programming Language: ").append(language).append(",")
-                        .append("Language Version: ").append(languageVar).append(",")
-                        .append("I want to: ").append(prob).append(",")
-                        .append("Assuming that: ").append(assumpts).append(",")
-                        .append("With the following constraints: ").append(constrs).append(",");
+                if(isHumanized)
+                {
+                    prompt.append("Generate a clear prompt to generate text, do any assumption and elaborate based on the following data:")
+                            .append("Type of prompt: ").append(promptType).append(",")
+                            .append("Text: ").append(textQuestion).append(",")
+                            .append("Desired Structure: ").append(structure).append(",")
+                            .append("Purpose: ").append(purpose).append(",")
+                            .append("Write it as if a human wrote it").append(",")
+                            .append("Maximum words:").append(maxWordsCounter).append(",")
+                            .append("Related it to the topic:").append(otherTopic).append(",");
+                    if(mentionOpinion)
+                    {
+                        prompt.append("Add an opinion as if you were me");
+                    }
+                }
+                else
+                {
+                    prompt.append("Generate a clear prompt to generate a Question, do any assumption and elaborate based on the following data:")
+                            .append("Type of prompt: ").append(promptType).append(",")
+                            .append("Text: ").append(textQuestion).append(",")
+                            .append("Desired Structure: ").append(structure).append(",")
+                            .append("Purpose: ").append(purpose).append(",")
+                            .append("Maximum words:").append(maxWordsCounter).append(",")
+                            .append("Related it to the topic:").append(otherTopic).append(",");
+                    if(mentionOpinion)
+                    {
+                        prompt.append("Add an opinion as if you were me");
+                    }
+                }
             } else {
-                checkEmptyFields(topicText, language, languageVar, prob, code);
+                checkEmptyFields(promptType, apiKey2.getText(), textQuestion, structure, purpose);
 
-                prompt.append("Generate a clear prompt, do any assumption and elaborate based on the following data:")
-                        .append("Given the following code: ").append(code).append(",")
-                        .append("Topic: ").append(topicText).append(",")
-                        .append("Programming Language: ").append(language).append(",")
-                        .append("version: ").append(languageVar).append(",")
-                        .append("I want to: ").append(prob).append(",")
-                        .append("Assuming that: ").append(assumpts).append(",")
-                        .append("With the following constraints: ").append(constrs).append(",");
+                if (isHumanized) {
+                    prompt.append("Generate a clear prompt to generate text, do any assumption and elaborate based on the following data:")
+                            .append("Type of prompt: ").append(promptType).append(",")
+                            .append("Text: ").append(textQuestion).append(",")
+                            .append("Desired Structure: ").append(structure).append(",")
+                            .append("Purpose: ").append(purpose).append(",")
+                            .append("Write it as if a human wrote it").append(",")
+                            .append("Maximum words:").append(maxWordsCounter).append(",")
+                            .append("Related it to the topic:").append(otherTopic).append(",");
+                    if (mentionOpinion) {
+                        prompt.append("Add an opinion as if you were me");
+                    }
+                } else {
+                    prompt.append("Generate a clear prompt to generate text, do any assumption and elaborate based on the following data:")
+                            .append("Type of prompt: ").append(promptType).append(",")
+                            .append("Text: ").append(textQuestion).append(",")
+                            .append("Desired Structure: ").append(structure).append(",")
+                            .append("Purpose: ").append(purpose).append(",")
+                            .append("Maximum words:").append(maxWordsCounter).append(",")
+                            .append("Related it to the topic:").append(otherTopic).append(",");
+                    if (mentionOpinion) {
+                        prompt.append("Add an opinion as if you were me");
+                    }
+                }
             }
 
             finalPrompt = prompt.toString();
+            prompt = new StringBuilder();
+            System.out.println(finalPrompt);
             LLMPrompt(finalPrompt, 1);
-
-            generateButton.setVisible(false);
-            copyButton.setVisible(true);
-            regenerateButton.setVisible(true);
         } catch (IllegalArgumentException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Empty Field", e.getMessage());
         }
@@ -197,6 +268,7 @@ public class GeneratePrompt {
             }
 
             finalPrompt = prompt.toString();
+            prompt = new StringBuilder();
             LLMPrompt(finalPrompt, 0);
 
             generateButton.setVisible(false);
