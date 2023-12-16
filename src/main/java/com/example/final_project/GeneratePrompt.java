@@ -2,31 +2,26 @@ package com.example.final_project;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-
-import java.time.format.TextStyle;
 
 public class GeneratePrompt {
 
+    // FXML elements
     @FXML
-    private Button generateButton;
+    private Button generateButtonForCode;
     @FXML
-    private Button generateButton2;
+    private Button generateButtonForText;
     @FXML
-    private Button regenerateButton;
+    private Button regenerateButtonForCode;
     @FXML
-    private Button regenerateButton1;
+    private Button regenerateButtonForText;
     @FXML
-    private Button copyButton;
+    private Button copyButtonForCode;
     @FXML
-    private Button copyButton1;
-
+    private Button copyButtonForText;
     @FXML
     private TextField topic;
     @FXML
@@ -37,31 +32,24 @@ public class GeneratePrompt {
     private TextArea assumptions;
     @FXML
     private TextArea constraints;
-
-    @FXML
-    private Label promptLabel;
-
     @FXML
     private ChoiceBox existingCodeChoice;
-
     @FXML
     private ChoiceBox languages;
     @FXML
     private TextField languageVersion;
-
     @FXML
-    private TextArea promptBox;
-
+    private TextArea promptBoxForCode;
     private StringBuilder prompt = new StringBuilder();
 
     @FXML
-    private TextField apiKey1;
+    private TextField apiKeyForCode;
 
     @FXML
-    private TextField apiKey2;
+    private TextField apiKeyForText;
 
     @FXML
-    private ChoiceBox opChoice;
+    private ChoiceBox opChoice; //Text or Question
 
     @FXML
     private TextArea textQuestionBox;
@@ -85,49 +73,48 @@ public class GeneratePrompt {
     private CheckBox opinionCheckBox;
 
     @FXML
-    private TextArea promptBox1;
-
+    private TextArea promptBoxForText;
     @FXML
     private Clipboard clipboard;
 
     @FXML
     private void initialize(){
-//        progressIndicator.setVisible(false);
         clipboard = Clipboard.getSystemClipboard();
     }
+
+    // Copy generated prompt to clipboard
     @FXML
     private void copyToClipboardCode() {
-        String promptText = promptBox.getText();
+        String promptText = promptBoxForCode.getText();
         ClipboardContent content = new ClipboardContent();
         content.putString(promptText);
         clipboard.setContent(content);
     }
     @FXML
     private void copyToClipboardText() {
-        String promptText = promptBox1.getText();
+        String promptText = promptBoxForText.getText();
         ClipboardContent content = new ClipboardContent();
         content.putString(promptText);
         clipboard.setContent(content);
     }
 
-
-
+    // Extract content from the API response
     private String getContent(String response) {
         int start = response.indexOf("content")+ 11;
         int end = response.indexOf("\"", start);
         return response.substring(start, end);
     }
-
+    // Method to make API request to OpenAI's ChatGPT
     private void LLMPrompt(String prompt, int flag)
     {
         String apiKey="";
         if(flag == 0)
         {
-            apiKey = apiKey1.getText();
+            apiKey = apiKeyForCode.getText();
         }
         else
         {
-            apiKey = apiKey2.getText();
+            apiKey = apiKeyForText.getText();
         }
         String model = "gpt-3.5-turbo";
         String url = "https://api.openai.com/v1/chat/completions";
@@ -138,8 +125,6 @@ public class GeneratePrompt {
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Authorization", "Bearer " + apiKey);
             connection.setRequestProperty("Content-Type", "application/json");
-//            prompt = "Generate prompt based on the following data: Topic: Data Processing, Programming Language: Java,Language Version: 11, I want to: generate a report, Assuming that: the input data is well-formatted, With the following constraints: limited to 1000 records,";
-
             // The request body
             String body = String.format("{\"model\": \"%s\", \"messages\": [{\"role\": \"user\", \"content\": \"%s\"}]}", model, prompt);
             connection.setDoOutput(true);
@@ -160,20 +145,19 @@ public class GeneratePrompt {
             br.close();
             String res = getContent(response.toString());
             res = res.replace("\\n", System.lineSeparator());
-            //res = res.replace("\n", "");
             if (flag == 0)
             {
-                promptBox.setText(res);
+                promptBoxForCode.setText(res);
             }
             else
             {
-                promptBox1.setText(res);
+                promptBoxForText.setText(res);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
+    // Set the visibility of UI elements based on the choice
     @FXML
     private void setVisible() {
         String choiceValue = existingCodeChoice.getValue().toString();
@@ -185,7 +169,7 @@ public class GeneratePrompt {
     }
 
     @FXML
-    private void generatePrompt2()
+    private void generatePromptForText()
     {
         String finalPrompt = "";
         String textQuestion = textQuestionBox.getText();
@@ -198,9 +182,8 @@ public class GeneratePrompt {
         boolean mentionOpinion = opinionCheckBox.isSelected();
 
         try {
-//            progressIndicator.setVisible(true);
             if (promptType == "Text") {
-                checkEmptyFields(promptType, apiKey2.getText(), textQuestion, structure, purpose);
+                checkEmptyFields(promptType, apiKeyForText.getText(), textQuestion, structure, purpose);
 
                 if(isHumanized)
                 {
@@ -232,7 +215,7 @@ public class GeneratePrompt {
                     }
                 }
             } else {
-                checkEmptyFields(promptType, apiKey2.getText(), textQuestion, structure, purpose);
+                checkEmptyFields(promptType, apiKeyForText.getText(), textQuestion, structure, purpose);
 
                 if (isHumanized) {
                     prompt.append("Generate a clear prompt to generate text, do any assumption and elaborate based on the following data:")
@@ -263,21 +246,17 @@ public class GeneratePrompt {
             finalPrompt = prompt.toString();
             finalPrompt = finalPrompt.replace("\\n", " ");
             prompt = new StringBuilder();
-//            System.out.println(finalPrompt);
             LLMPrompt(finalPrompt, 1);
-
-//            progressIndicator.setVisible(false);
-
-            generateButton2.setVisible(false);
-            copyButton1.setVisible(true);
-            regenerateButton1.setVisible(true);
+            generateButtonForText.setVisible(false);
+            copyButtonForText.setVisible(true);
+            regenerateButtonForText.setVisible(true);
         } catch (IllegalArgumentException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Empty Field", e.getMessage());
         }
     }
 
     @FXML
-    private void generatePrompt() {
+    private void generatePromptForCode() {
         String finalPrompt = "";
         String topicText = topic.getText();
         String language = languages.getValue() != null ? languages.getValue().toString() : "";
@@ -288,7 +267,6 @@ public class GeneratePrompt {
         String constrs = constraints.getText();
 
         try {
-//            progressIndicator.setVisible(true);
             if (existingCode.isDisabled()) {
                 checkEmptyFields(topicText, language, languageVar, prob);
 
@@ -316,16 +294,14 @@ public class GeneratePrompt {
             finalPrompt = finalPrompt.replace("\\n", " ");
             prompt = new StringBuilder();
             LLMPrompt(finalPrompt, 0);
-
-//            progressIndicator.setVisible(false);
-            generateButton.setVisible(false);
-            copyButton.setVisible(true);
-            regenerateButton.setVisible(true);
+            generateButtonForCode.setVisible(false);
+            copyButtonForCode.setVisible(true);
+            regenerateButtonForCode.setVisible(true);
         } catch (IllegalArgumentException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Empty Field", e.getMessage());
         }
     }
-
+    // Check for empty fields in the specified parameters
     private void checkEmptyFields(String... fields) {
         for (String field : fields) {
             if (field.trim().isEmpty()) {
@@ -333,7 +309,7 @@ public class GeneratePrompt {
             }
         }
     }
-
+    // Show an alert dialog with the specified details
     private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

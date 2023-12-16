@@ -40,12 +40,12 @@
                               <Label layoutX="14.0" layoutY="127.0" prefHeight="18.0" prefWidth="106.0" text="Existing Code" textFill="WHITE" />
                               <AnchorPane layoutX="14.0" layoutY="466.0" prefHeight="268.0" prefWidth="847.0" style="-fx-background-color: #E8DAEF;">
                                  <children>
-                                    <Button fx:id="copyButton" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" onAction="#copyToClipboardCode" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
+                                    <Button fx:id="copyButtonForCode" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" onAction="#copyToClipboardCode" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="16.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="regenerateButton" layoutX="22.0" layoutY="219.0" mnemonicParsing="false" onAction="#generatePrompt" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE" visible="false">
+                                    <Button fx:id="regenerateButtonForCode" layoutX="22.0" layoutY="219.0" mnemonicParsing="false" onAction="#generatePromptForCode" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE" visible="false">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
@@ -55,8 +55,8 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="promptBox" editable="false" layoutX="14.0" layoutY="58.0" prefHeight="152.0" prefWidth="818.0" wrapText="true" />
-                                    <Button fx:id="generateButton" layoutX="350.0" layoutY="217.0" mnemonicParsing="false" onAction="#generatePrompt" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
+                                    <TextArea fx:id="promptBoxForCode" editable="false" layoutX="14.0" layoutY="58.0" prefHeight="152.0" prefWidth="818.0" wrapText="true" />
+                                    <Button fx:id="generateButtonForCode" layoutX="350.0" layoutY="217.0" mnemonicParsing="false" onAction="#generatePromptForCode" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
@@ -87,7 +87,7 @@
                               <TextArea fx:id="assumptions" layoutX="493.0" layoutY="174.0" prefHeight="102.0" prefWidth="366.0" wrapText="true" />
                               <TextField fx:id="languageVersion" layoutX="117.0" layoutY="94.0" prefHeight="26.0" prefWidth="235.0" />
                               <Label fx:id="languageVersionLabel" layoutX="14.0" layoutY="98.0" prefHeight="18.0" prefWidth="140.0" text="Language Version:" textFill="WHITE" />
-                              <TextField fx:id="apiKey1" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" text="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" />
+                              <TextField fx:id="apiKeyForCode" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" text="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" />
                               <Label fx:id="languageVersionLabel1" layoutX="553.0" layoutY="23.0" prefHeight="18.0" prefWidth="113.0" text="ChatGPT 3.5 API Key:" textFill="WHITE" />
                            </children>
                         </AnchorPane>
@@ -134,15 +134,15 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="apiKey2" layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" text="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" />
+                              <TextField fx:id="apiKeyForText" layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" text="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" />
                               <AnchorPane layoutX="21.0" layoutY="470.0" prefHeight="255.0" prefWidth="846.0" style="-fx-background-color: #E8DAEF;">
                                  <children>
-                                    <Button fx:id="copyButton1" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" onAction="#copyToClipboardText" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
+                                    <Button fx:id="copyButtonForText" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" onAction="#copyToClipboardText" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="16.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="regenerateButton1" layoutX="22.0" layoutY="219.0" mnemonicParsing="false" onAction="#generatePrompt2" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE" visible="false">
+                                    <Button fx:id="regenerateButtonForText" layoutX="22.0" layoutY="219.0" mnemonicParsing="false" onAction="#generatePromptForText" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE" visible="false">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
@@ -152,8 +152,8 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="promptBox1" editable="false" layoutX="14.0" layoutY="44.0" prefHeight="152.0" prefWidth="805.0" wrapText="true" />
-                                    <Button fx:id="generateButton2" layoutX="352.0" layoutY="204.0" mnemonicParsing="false" onAction="#generatePrompt2" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
+                                    <TextArea fx:id="promptBoxForText" editable="false" layoutX="14.0" layoutY="44.0" prefHeight="152.0" prefWidth="805.0" wrapText="true" />
+                                    <Button fx:id="generateButtonForText" layoutX="352.0" layoutY="204.0" mnemonicParsing="false" onAction="#generatePromptForText" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
@@ -169,7 +169,6 @@
                                  <items>
                                     <FXCollections fx:factory="observableArrayList">
                                        <String fx:value="Bullet Points" />
-                                       <String fx:value="Paragraph" />
                                         <String fx:value="Paragraph" />
                                         <String fx:value="Essay" />
                                     </FXCollections>
