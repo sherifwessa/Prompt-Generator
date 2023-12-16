@@ -87,7 +87,7 @@
                               <TextArea fx:id="assumptions" layoutX="553.0" layoutY="174.0" prefHeight="101.0" prefWidth="306.0" />
                               <TextField fx:id="languageVersion" layoutX="117.0" layoutY="94.0" prefHeight="26.0" prefWidth="235.0" />
                               <Label fx:id="languageVersionLabel" layoutX="14.0" layoutY="98.0" prefHeight="18.0" prefWidth="140.0" text="Language Version:" textFill="WHITE" />
-                              <TextField fx:id="languageVersion1" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" />
+                              <TextField fx:id="apiKey1" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" />
                               <Label fx:id="languageVersionLabel1" layoutX="650.0" layoutY="23.0" prefHeight="18.0" prefWidth="113.0" text="ChatGPT 3.5 API Key:" textFill="WHITE" />
                            </children>
                         </AnchorPane>
@@ -97,7 +97,14 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #651251;">
                            <children>
-                              <ChoiceBox fx:id="opChoice" layoutX="382.0" layoutY="111.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="opChoice" layoutX="382.0" layoutY="111.0" prefWidth="150.0">
+                               <items>
+                                   <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="Topic" />
+                                       <String fx:value="Question" />
+                                   </FXCollections>
+                               </items>
+                           </ChoiceBox>
                               <Label layoutX="359.0" layoutY="73.0" text="Choose the type of prompt:" textFill="WHITE">
                                  <font>
                                     <Font size="16.0" />
@@ -127,7 +134,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" />
+                              <TextField fx:id="apiKey2" layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" />
                            </children></AnchorPane>
                   </content>
                 </Tab>

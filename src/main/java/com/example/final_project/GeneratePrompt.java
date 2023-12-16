@@ -43,6 +43,12 @@ public class GeneratePrompt {
 
     private StringBuilder prompt = new StringBuilder();
 
+    @FXML
+    private TextField apiKey1;
+
+    @FXML
+    private TextField apiKey2;
+
 
     private String getContent(String response) {
         int start = response.indexOf("content")+ 11;
@@ -55,7 +61,7 @@ public class GeneratePrompt {
 
     private void LLMPrompt(String prompt)
     {
-        String apiKey = "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"; //hashish's account
+        String apiKey = apiKey1.getText(); //hashish's account
         String model = "gpt-3.5-turbo";
         String url = "https://api.openai.com/v1/chat/completions";
 
