@@ -1,9 +1,14 @@
 package com.example.final_project;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 
 import java.time.format.TextStyle;
 
@@ -12,9 +17,15 @@ public class GeneratePrompt {
     @FXML
     private Button generateButton;
     @FXML
+    private Button generateButton2;
+    @FXML
     private Button regenerateButton;
     @FXML
+    private Button regenerateButton1;
+    @FXML
     private Button copyButton;
+    @FXML
+    private Button copyButton1;
 
     @FXML
     private TextField topic;
@@ -76,6 +87,32 @@ public class GeneratePrompt {
     @FXML
     private TextArea promptBox1;
 
+    @FXML
+    private ProgressIndicator progressIndicator;
+    @FXML
+    private Clipboard clipboard;
+
+    @FXML
+    private void initialize(){
+        progressIndicator.setVisible(false);
+        clipboard = Clipboard.getSystemClipboard();
+    }
+    @FXML
+    private void copyToClipboardCode() {
+        String promptText = promptBox.getText();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(promptText);
+        clipboard.setContent(content);
+    }
+    @FXML
+    private void copyToClipboardText() {
+        String promptText = promptBox1.getText();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(promptText);
+        clipboard.setContent(content);
+    }
+
+
 
     private String getContent(String response) {
         int start = response.indexOf("content")+ 11;
@@ -124,7 +161,8 @@ public class GeneratePrompt {
             }
             br.close();
             String res = getContent(response.toString());
-            res = res.replace("\n", "");
+            res = res.replace("\\n", System.lineSeparator());
+            //res = res.replace("\n", "");
             if (flag == 0)
             {
                 promptBox.setText(res);
@@ -162,6 +200,7 @@ public class GeneratePrompt {
         boolean mentionOpinion = opinionCheckBox.isSelected();
 
         try {
+            progressIndicator.setVisible(true);
             if (promptType == "Text") {
                 checkEmptyFields(promptType, apiKey2.getText(), textQuestion, structure, purpose);
 
@@ -224,9 +263,16 @@ public class GeneratePrompt {
             }
 
             finalPrompt = prompt.toString();
+            finalPrompt = finalPrompt.replace("\\n", " ");
             prompt = new StringBuilder();
 //            System.out.println(finalPrompt);
             LLMPrompt(finalPrompt, 1);
+
+            progressIndicator.setVisible(false);
+
+            generateButton2.setVisible(false);
+            copyButton1.setVisible(true);
+            regenerateButton1.setVisible(true);
         } catch (IllegalArgumentException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Empty Field", e.getMessage());
         }
@@ -244,6 +290,7 @@ public class GeneratePrompt {
         String constrs = constraints.getText();
 
         try {
+            progressIndicator.setVisible(true);
             if (existingCode.isDisabled()) {
                 checkEmptyFields(topicText, language, languageVar, prob);
 
@@ -268,9 +315,11 @@ public class GeneratePrompt {
             }
 
             finalPrompt = prompt.toString();
+            finalPrompt = finalPrompt.replace("\\n", " ");
             prompt = new StringBuilder();
             LLMPrompt(finalPrompt, 0);
 
+            progressIndicator.setVisible(false);
             generateButton.setVisible(false);
             copyButton.setVisible(true);
             regenerateButton.setVisible(true);

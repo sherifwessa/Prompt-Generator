@@ -7,6 +7,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -32,15 +33,15 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="673.0" prefWidth="1014.0" style="-fx-background-color: #651251;">
                            <children>
-                              <TextField fx:id="topic" layoutX="553.0" layoutY="111.0" prefHeight="26.0" prefWidth="306.0" />
-                              <Label layoutX="553.0" layoutY="89.0" prefHeight="18.0" prefWidth="43.0" text="Topic*" textFill="WHITE" />
+                              <TextField fx:id="topic" layoutX="492.0" layoutY="111.0" prefHeight="26.0" prefWidth="367.0" />
+                              <Label layoutX="494.0" layoutY="89.0" prefHeight="18.0" prefWidth="43.0" text="Topic*" textFill="WHITE" />
                               <Label layoutX="14.0" layoutY="269.0" prefHeight="18.0" prefWidth="114.0" text="Problem Statement*" textFill="WHITE" />
-                              <Label layoutX="553.0" layoutY="156.0" prefHeight="18.0" prefWidth="74.0" text="Assumtions" textFill="WHITE" />
-                              <Label layoutX="553.0" layoutY="276.0" prefHeight="18.0" prefWidth="74.0" text="Constraints" textFill="WHITE" />
+                              <Label layoutX="492.0" layoutY="152.0" prefHeight="18.0" prefWidth="74.0" text="Assumtions" textFill="WHITE" />
+                              <Label layoutX="494.0" layoutY="278.0" prefHeight="18.0" prefWidth="74.0" text="Constraints" textFill="WHITE" />
                               <Label layoutX="14.0" layoutY="127.0" prefHeight="18.0" prefWidth="106.0" text="Existing Code" textFill="WHITE" />
                               <AnchorPane layoutX="14.0" layoutY="466.0" prefHeight="268.0" prefWidth="847.0" style="-fx-background-color: #E8DAEF;">
                                  <children>
-                                    <Button fx:id="copyButton" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
+                                    <Button fx:id="copyButton" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" onAction="#copyToClipboardCode" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="16.0" />
                                        </font>
@@ -55,7 +56,7 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="promptBox" layoutX="14.0" layoutY="58.0" prefHeight="152.0" prefWidth="818.0" />
+                                    <TextArea fx:id="promptBox" layoutX="14.0" layoutY="58.0" prefHeight="152.0" prefWidth="818.0" wrapText="true" />
                                     <Button fx:id="generateButton" layoutX="350.0" layoutY="217.0" mnemonicParsing="false" onAction="#generatePrompt" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
@@ -81,14 +82,14 @@
                                       </FXCollections>
                                   </items>
                               </ChoiceBox>
-                              <TextArea fx:id="existingCode" disable="true" layoutX="14.0" layoutY="152.0" prefHeight="114.0" prefWidth="339.0" />
-                              <TextArea fx:id="problemStatement" layoutX="14.0" layoutY="287.0" prefHeight="170.0" prefWidth="342.0" />
-                              <TextArea fx:id="constraints" layoutX="553.0" layoutY="294.0" prefHeight="165.0" prefWidth="307.0" />
-                              <TextArea fx:id="assumptions" layoutX="553.0" layoutY="174.0" prefHeight="101.0" prefWidth="306.0" />
+                              <TextArea fx:id="existingCode" disable="true" layoutX="14.0" layoutY="152.0" prefHeight="114.0" prefWidth="339.0" wrapText="true" />
+                              <TextArea fx:id="problemStatement" layoutX="14.0" layoutY="287.0" prefHeight="170.0" prefWidth="342.0" wrapText="true" />
+                              <TextArea fx:id="constraints" layoutX="494.0" layoutY="294.0" prefHeight="166.0" prefWidth="366.0" wrapText="true" />
+                              <TextArea fx:id="assumptions" layoutX="493.0" layoutY="174.0" prefHeight="102.0" prefWidth="366.0" wrapText="true" />
                               <TextField fx:id="languageVersion" layoutX="117.0" layoutY="94.0" prefHeight="26.0" prefWidth="235.0" />
                               <Label fx:id="languageVersionLabel" layoutX="14.0" layoutY="98.0" prefHeight="18.0" prefWidth="140.0" text="Language Version:" textFill="WHITE" />
-                              <TextField fx:id="apiKey1" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" />
-                              <Label fx:id="languageVersionLabel1" layoutX="650.0" layoutY="23.0" prefHeight="18.0" prefWidth="113.0" text="ChatGPT 3.5 API Key:" textFill="WHITE" />
+                              <TextField fx:id="apiKey1" layoutX="553.0" layoutY="43.0" prefHeight="26.0" prefWidth="305.0" text="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" />
+                              <Label fx:id="languageVersionLabel1" layoutX="553.0" layoutY="23.0" prefHeight="18.0" prefWidth="113.0" text="ChatGPT 3.5 API Key:" textFill="WHITE" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -110,39 +111,39 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextArea fx:id="textQuestionBox" layoutX="77.0" layoutY="144.0" prefHeight="178.0" prefWidth="382.0" />
+                              <TextArea fx:id="textQuestionBox" layoutX="77.0" layoutY="144.0" prefHeight="178.0" prefWidth="382.0" wrapText="true" />
                               <Label layoutX="220.0" layoutY="115.0" text="Text/Question" textFill="#fcfcfc">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="331.0" layoutY="355.0" text="Maximum words:" textFill="#fcfcfc">
+                              <Label layoutX="312.0" layoutY="356.0" text="Maximum words:" textFill="#fcfcfc">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="maxWords" layoutX="448.0" layoutY="353.0" prefHeight="26.0" prefWidth="135.0" />
+                              <TextField fx:id="maxWords" layoutX="422.0" layoutY="353.0" prefHeight="26.0" prefWidth="203.0" />
                               <Label layoutX="288.0" layoutY="397.0" text="Relate to any topic?" textFill="#fcfcfc">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="relatedTopic" layoutX="422.0" layoutY="394.0" prefHeight="26.0" prefWidth="204.0" />
-                              <CheckBox fx:id="opinionCheckBox" layoutX="365.0" layoutY="429.0" mnemonicParsing="false" text="Add personal opinion as if you" textFill="WHITE" />
+                              <CheckBox fx:id="opinionCheckBox" layoutX="422.0" layoutY="432.0" mnemonicParsing="false" text="Add personal opinion as if you" textFill="WHITE" />
                               <Label layoutX="208.0" layoutY="29.0" text="ChatGPT 3.5 API Key:" textFill="#fcfcfc">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="apiKey2" layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" />
-                              <AnchorPane layoutX="21.0" layoutY="461.0" prefHeight="194.0" prefWidth="758.0" style="-fx-background-color: #E8DAEF;">
+                              <TextField fx:id="apiKey2" layoutX="345.0" layoutY="26.0" prefHeight="26.0" prefWidth="302.0" text="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" />
+                              <AnchorPane layoutX="21.0" layoutY="470.0" prefHeight="255.0" prefWidth="846.0" style="-fx-background-color: #E8DAEF;">
                                  <children>
-                                    <Button fx:id="copyButton1" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
+                                    <Button fx:id="copyButton1" layoutX="781.0" layoutY="218.0" mnemonicParsing="false" onAction="#copyToClipboardText" style="-fx-background-color: #0a0619;" text="Copy" textFill="WHITE" visible="false">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="16.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="regenerateButton1" layoutX="22.0" layoutY="219.0" mnemonicParsing="false" onAction="#generatePrompt" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE" visible="false">
+                                    <Button fx:id="regenerateButton1" layoutX="22.0" layoutY="219.0" mnemonicParsing="false" onAction="#generatePrompt2" style="-fx-background-color: #651251;" text="Regenerate" textFill="WHITE" visible="false">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
@@ -152,12 +153,13 @@
                                           <Font name="System Bold" size="32.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="promptBox1" layoutX="6.0" layoutY="44.0" prefHeight="152.0" prefWidth="818.0" />
-                                    <Button fx:id="generateButton2" layoutX="350.0" layoutY="212.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE" onAction="#generatePrompt2">
+                                    <TextArea fx:id="promptBox1" layoutX="14.0" layoutY="44.0" prefHeight="152.0" prefWidth="805.0" wrapText="true" />
+                                    <Button fx:id="generateButton2" layoutX="352.0" layoutY="204.0" mnemonicParsing="false" onAction="#generatePrompt2" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: #651251;" text="Generate" textFill="WHITE">
                                        <font>
                                           <Font name="Franklin Gothic Demi Cond" size="15.0" />
                                        </font>
                                     </Button>
+                                    <ProgressIndicator fx:id="progressIndicator" layoutX="395.0" layoutY="94.0" prefHeight="47.0" prefWidth="114.0" styleClass="color" />
                                  </children>
                               </AnchorPane>
                               <Label layoutX="499.0" layoutY="180.0" text="Desired structure:" textFill="#fcfcfc">
@@ -181,7 +183,7 @@
                                  </font>
                               </Label>
                               <TextField fx:id="purposeTextBox" layoutX="558.0" layoutY="225.0" prefHeight="26.0" prefWidth="209.0" />
-                              <CheckBox fx:id="humanize" layoutX="497.0" layoutY="272.0" mnemonicParsing="false" text="Humanize" textFill="WHITE" />
+                              <CheckBox fx:id="humanize" layoutX="558.0" layoutY="269.0" mnemonicParsing="false" text="Humanize" textFill="WHITE" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
