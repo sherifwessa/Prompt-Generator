@@ -52,16 +52,21 @@ public class GeneratePrompt {
 
     private String getContent(String response) {
         int start = response.indexOf("content")+ 11;
-
         int end = response.indexOf("\"", start);
-
         return response.substring(start, end);
-
     }
 
-    private void LLMPrompt(String prompt)
+    private void LLMPrompt(String prompt, int flag)
     {
-        String apiKey = apiKey1.getText(); //hashish's account
+        String apiKey="";
+        if(flag == 0)
+        {
+            apiKey = apiKey1.getText();
+        }
+        else
+        {
+            apiKey = apiKey2.getText();
+        }
         String model = "gpt-3.5-turbo";
         String url = "https://api.openai.com/v1/chat/completions";
 
@@ -91,7 +96,6 @@ public class GeneratePrompt {
                 response.append(line);
             }
             br.close();
-            char back = '\\';
             String res = getContent(response.toString());
             res = res.replace("\n", "");
             promptBox.setText(res);
@@ -107,6 +111,53 @@ public class GeneratePrompt {
             existingCode.setDisable(true);
         } else if ("Yes".equals(choiceValue)) {
             existingCode.setDisable(false);
+        }
+    }
+
+    @FXML
+    private void generatePrompt2()
+    {
+        String finalPrompt = "";
+        String topicText = topic.getText();
+        String language = languages.getValue() != null ? languages.getValue().toString() : "";
+        String languageVar = languageVersion.getText();
+        String code = existingCode.getText();
+        String prob = problemStatement.getText();
+        String assumpts = assumptions.getText();
+        String constrs = constraints.getText();
+
+        try {
+            if (existingCode.isDisabled()) {
+                checkEmptyFields(topicText, language, languageVar, prob);
+
+                prompt.append("Generate a clear prompt, do any assumption and elaborate based on the following data:")
+                        .append("Topic: ").append(topicText).append(",")
+                        .append("Programming Language: ").append(language).append(",")
+                        .append("Language Version: ").append(languageVar).append(",")
+                        .append("I want to: ").append(prob).append(",")
+                        .append("Assuming that: ").append(assumpts).append(",")
+                        .append("With the following constraints: ").append(constrs).append(",");
+            } else {
+                checkEmptyFields(topicText, language, languageVar, prob, code);
+
+                prompt.append("Generate a clear prompt, do any assumption and elaborate based on the following data:")
+                        .append("Given the following code: ").append(code).append(",")
+                        .append("Topic: ").append(topicText).append(",")
+                        .append("Programming Language: ").append(language).append(",")
+                        .append("version: ").append(languageVar).append(",")
+                        .append("I want to: ").append(prob).append(",")
+                        .append("Assuming that: ").append(assumpts).append(",")
+                        .append("With the following constraints: ").append(constrs).append(",");
+            }
+
+            finalPrompt = prompt.toString();
+            LLMPrompt(finalPrompt, 1);
+
+            generateButton.setVisible(false);
+            copyButton.setVisible(true);
+            regenerateButton.setVisible(true);
+        } catch (IllegalArgumentException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Empty Field", e.getMessage());
         }
     }
 
@@ -146,7 +197,7 @@ public class GeneratePrompt {
             }
 
             finalPrompt = prompt.toString();
-            LLMPrompt(finalPrompt);
+            LLMPrompt(finalPrompt, 0);
 
             generateButton.setVisible(false);
             copyButton.setVisible(true);
