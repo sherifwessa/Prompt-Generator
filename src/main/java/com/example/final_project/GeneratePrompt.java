@@ -187,7 +187,7 @@ public class GeneratePrompt {
 
                 if(isHumanized)
                 {
-                    prompt.append("Generate a clear prompt to generate text, do any assumption and elaborate based on the following data:")
+                    prompt.append("Generate a clear prompt, do any assumption and elaborate based on the following data:")
                             .append("Type of prompt: ").append(promptType).append(",")
                             .append("Text: ").append(textQuestion).append(",")
                             .append("Desired Structure: ").append(structure).append(",")
@@ -202,7 +202,7 @@ public class GeneratePrompt {
                 }
                 else
                 {
-                    prompt.append("Generate a clear prompt to generate a Question, do any assumption and elaborate based on the following data:")
+                    prompt.append("Generate a clear prompt, do any assumption and elaborate based on the following data:")
                             .append("Type of prompt: ").append(promptType).append(",")
                             .append("Text: ").append(textQuestion).append(",")
                             .append("Desired Structure: ").append(structure).append(",")
@@ -218,7 +218,7 @@ public class GeneratePrompt {
                 checkEmptyFields(promptType, apiKeyForText.getText(), textQuestion, structure, purpose);
 
                 if (isHumanized) {
-                    prompt.append("Generate a clear prompt to generate text, do any assumption and elaborate based on the following data:")
+                    prompt.append("Generate a clear prompt, do any assumption and elaborate based on the following data:")
                             .append("Type of prompt: ").append(promptType).append(",")
                             .append("Text: ").append(textQuestion).append(",")
                             .append("Desired Structure: ").append(structure).append(",")
@@ -230,7 +230,7 @@ public class GeneratePrompt {
                         prompt.append("Add an opinion as if you were me");
                     }
                 } else {
-                    prompt.append("Generate a clear prompt to generate text, do any assumption and elaborate based on the following data:")
+                    prompt.append("Generate a clear prompt, do any assumption and elaborate based on the following data:")
                             .append("Type of prompt: ").append(promptType).append(",")
                             .append("Text: ").append(textQuestion).append(",")
                             .append("Desired Structure: ").append(structure).append(",")
