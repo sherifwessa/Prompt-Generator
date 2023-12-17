@@ -121,59 +121,7 @@ public class GeneratePrompt {
             }
         }).start();
     }
-    // Method to make API request to OpenAI's ChatGPT
-//    private void LLMPrompt(String prompt, int flag)
-//    {
-//        String apiKey="";
-//        if(flag == 0)
-//        {
-//            apiKey = apiKeyForCode.getText();
-//        }
-//        else
-//        {
-//            apiKey = apiKeyForText.getText();
-//        }
-//        String model = "gpt-3.5-turbo";
-//        String url = "https://api.openai.com/v1/chat/completions";
-//
-//        try {
-//            URL obj = new URL(url);
-//            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-//            connection.setRequestMethod("POST");
-//            connection.setRequestProperty("Authorization", "Bearer " + apiKey);
-//            connection.setRequestProperty("Content-Type", "application/json");
-//            // The request body
-//            String body = String.format("{\"model\": \"%s\", \"messages\": [{\"role\": \"user\", \"content\": \"%s\"}]}", model, prompt);
-//            connection.setDoOutput(true);
-//            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-//            writer.write(body);
-//            writer.flush();
-//            writer.close();
-//
-//            // Response from ChatGPT
-//            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//            String line;
-//
-//            StringBuilder response = new StringBuilder();
-//
-//            while ((line = br.readLine()) != null) {
-//                response.append(line);
-//            }
-//            br.close();
-//            String res = getContent(response.toString());
-//            res = res.replace("\\n", System.lineSeparator());
-//            if (flag == 0)
-//            {
-//                promptBoxForCode.setText(res);
-//            }
-//            else
-//            {
-//                promptBoxForText.setText(res);
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
     // Set the visibility of UI elements based on the choice
     @FXML
     private void setVisible() {
